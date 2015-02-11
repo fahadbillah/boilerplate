@@ -40,7 +40,7 @@
 
  	$scope.toggleActive = function(link) {
  		console.log(link);
- 		angular.forEach($scope.menu,function(e,i){
+ 		angular.forEach($scope.menu,function(e){
  			if(link === e.link){
  				e.active = true;
  			}else{

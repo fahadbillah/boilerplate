@@ -32,12 +32,14 @@
  	var xsrf = $cookies['XSRF-TOKEN'];
 
  	$scope.returnedMessage;
+
  	$scope.registrationSubmit = function() {
- 		console.log($scope.credentials);
 
  		$scope.credentials.csrf_test_name = xsrf;
 
  		var credentials = $.param($scope.credentials);
+
+ 		$scope.clicked = true;
 
  		$http.post('api/index.php/auth/registration', credentials, {headers : {'Content-Type': 'application/x-www-form-urlencoded'}})
  		.success(function(data) {
@@ -56,10 +58,12 @@
  			};
 
  			$scope.registration.$setPristine();
+ 			$scope.clicked = false;
  		})
  		.error(function(data) {
  			console.log(data);
- 		})
+ 			$scope.clicked = false;
+ 		});
  	}
 
  }]);
