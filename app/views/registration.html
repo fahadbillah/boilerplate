@@ -1,0 +1,79 @@
+<div class="alert" ng-class="{'alert-success':returnedMessage.success == true,'alert-danger':returnedMessage.success == false}">
+	<strong> {{returnedMessage.message}} </strong>
+</div>
+<form name="registration" class="form-horizontal" role="form" ng-submit="registrationSubmit()" novalidate>
+	<div class="form-group">
+		<legend>Sign Up</legend>
+	</div>
+
+
+	<div class="form-group">
+		<label class="col-sm-3 control-label">First Name</label>
+		<div class="col-sm-9">
+			<input type="text" class="form-control" name="first_name" ng-model="credentials.first_name" placeholder="" required>
+			<span class="label label-danger" ng-if="registration.first_name.$error.required && registration.first_name.$dirty">Required!</span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Last Name</label>
+		<div class="col-sm-9">
+			<input type="text" class="form-control" name="last_name" ng-model="credentials.last_name" placeholder="" required>
+			<span class="label label-danger" ng-if="registration.last_name.$error.required && registration.last_name.$dirty">Required!</span>
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Email</label>
+		<div class="col-sm-9">
+			<input type="email" class="form-control" name="email" ng-model="credentials.email" placeholder="" required>
+			<span class="label label-danger" ng-if="registration.email.$error.required && registration.email.$dirty">Required!</span>
+			<span class="label label-danger" ng-if="registration.email.$invalid && registration.email.$dirty">Invalid Email!</span>
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Phone No.</label>
+		<div class="col-sm-9">
+			<input type="text" class="form-control" name="phone" ng-model="credentials.phone" placeholder="" required>
+			<span class="label label-danger" ng-if="registration.phone.$error.required && registration.phone.$dirty">Required!</span>
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Address</label>
+		<div class="col-sm-9">
+			<textarea class="form-control" name="address" ng-model="credentials.address" required></textarea>
+			<span class="label label-danger" ng-if="registration.address.$error.required && registration.address.$dirty">Required!</span>
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Password</label>
+		<div class="col-sm-9">
+			<input type="password" class="form-control" name="password" ng-model="credentials.password" placeholder="" required>
+			<span class="label label-danger" ng-if="registration.password.$error.required && registration.password.$dirty">Required!</span>
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Confirm Password</label>
+		<div class="col-sm-9">
+			<input type="password" class="form-control" name="repassword" ng-model="credentials.repassword" placeholder="" required>
+			<span class="label label-danger" ng-if="registration.repassword.$error.required && registration.repassword.$dirty">Required!</span>
+			<span class="label label-danger" ng-if="credentials.repassword != credentials.password">Password Missmatch!</span>
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<div class="col-sm-9 col-sm-offset-3">
+			<button type="submit" class="btn btn-primary" ng-disabled="registration.$invalid || registration.$pristine || clicked">Submit</button>
+		</div>
+	</div>
+</form>
