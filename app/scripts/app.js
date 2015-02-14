@@ -42,6 +42,14 @@
       authorizedRoles: [USER_ROLES.all]
     }
   })
+   .when('/registration', {
+     templateUrl: 'views/registration.html',
+     controller: 'RegistrationCtrl'
+   })
+   .when('/registration/:referral', {
+     templateUrl: 'views/registration.html',
+     controller: 'RegistrationCtrl'
+   })
    .otherwise({
      redirectTo: '/'
    });
