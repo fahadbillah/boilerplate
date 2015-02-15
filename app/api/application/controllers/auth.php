@@ -24,13 +24,16 @@ class Auth extends CI_Controller {
 
 	public function login()
 	{
-		$returned_data['id'] = $this->session->all_userdata()['session_id'];
-		$returned_data['user']['username'] = 'fahadbillah';
-		$returned_data['user']['email'] = 'fahadbillah@yahoo.com';
-		$returned_data['user']['first_name'] = 'Fahad';
-		$returned_data['user']['last_name'] = 'Billah';
-		$returned_data['user']['id'] = 1;
-		$returned_data['user']['role'] = 'admin';
+
+		$received_data = get_post();
+		pr($received_data);
+		exit();
+
+		$received_data['password'] = sha1($received_data['password']);
+
+		$this->load->model('user_model');
+		$this->user_model->check_user_login($received_data);
+
 
 		echo json_encode($returned_data);
 	}
@@ -57,6 +60,16 @@ class Auth extends CI_Controller {
 		$returned_data['success'] = $result;
 		$returned_data['message'] = ($result) ? 'Registration successfull!' : 'Registration failed!';
 		jsonify($returned_data);
+	}
+
+	private function set_session_data($user_data)
+	{
+		$session_data = array(
+		                      'is_logged_in' => true,
+		                      'user_data' => $user_data
+		                      );
+		
+		return $this->session->set_userdata( $session_data );
 	}
 
 }

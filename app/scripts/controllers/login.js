@@ -8,7 +8,7 @@
  * Controller of the h3atApp
  */
  angular.module('h3atApp')
- .controller('LoginCtrl',['$scope','AuthService', function ($scope,AuthService) {
+ .controller('LoginCtrl',['$scope','$cookies','AuthService', function ($scope,$cookies,AuthService) {
  	$scope.awesomeThings = [
  	'HTML5 Boilerplate',
  	'AngularJS',
@@ -16,10 +16,15 @@
  	];
 
  	$scope.credentials = {
+ 		csrf_test_name: '',
  		username: '',
  		password: ''
  	};
+
+ 	var xsrf = $cookies['XSRF-TOKEN'];
+
  	$scope.login = function (credentials) {
+ 		$scope.credentials.csrf_test_name = xsrf;
  		AuthService.login(credentials).then(function (user) {
  			console.log(user);
  			// $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
